@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx73g5gm4hjgn"]
+
+[ext_resource type="Texture2D" uid="uid://byl1nih4hr06d" path="res://assets/sprites/player/muzzle_flash_01.png" id="1_r2kf7"]
+
+[sub_resource type="GDScript" id="GDScript_r2kf7"]
+script/source = "extends Sprite2D
+
+@export var flash_time := 0.06 
+
+func flash():
+	visible = true
+	modulate.a = 1.0 
+	scale = Vector2(randf_range(0.7, 1.1), randf_range(0.7, 1.1)) 
+
+	await get_tree().create_timer(flash_time).timeout
+	visible = false
+"
+
+[node name="Muzzle_flash" type="Sprite2D"]
+texture = ExtResource("1_r2kf7")
+script = SubResource("GDScript_r2kf7")
