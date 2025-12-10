@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://fxt3fbsv6536"]
+
+[ext_resource type="Script" uid="uid://cfqdvhrancye5" path="res://scripts/blood_hit.gd" id="1_imogn"]
+[ext_resource type="Texture2D" uid="uid://cv73vg4fuwfyi" path="res://assets/sprites/player/Blood.png" id="2_fjb4r"]
+
+[node name="Hit_blood_scene" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.8)
+self_modulate = Color(1, 1, 1, 0.74509805)
+z_index = -1
+position = Vector2(44, 5.000001)
+scale = Vector2(0.38729167, 0.2837049)
+texture = ExtResource("2_fjb4r")
+script = ExtResource("1_imogn")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

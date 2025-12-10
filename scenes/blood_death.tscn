@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://divkwpemyobhk"]
+
+[ext_resource type="Texture2D" uid="uid://cc43fnr0sssmq" path="res://assets/sprites/player/Blood_1.png" id="1_j715t"]
+[ext_resource type="Script" uid="uid://c8jwo4pd7cbpp" path="res://scripts/blood_death.gd" id="1_mo5lf"]
+
+[node name="Blood_death" type="Sprite2D"]
+self_modulate = Color(0.51, 0.51, 0.51, 0.6666667)
+texture = ExtResource("1_j715t")
+script = ExtResource("1_mo5lf")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

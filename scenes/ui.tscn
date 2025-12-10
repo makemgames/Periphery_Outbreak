@@ -1,0 +1,62 @@
+[gd_scene load_steps=6 format=3 uid="uid://c7i6t5uh68w7s"]
+
+[ext_resource type="Texture2D" uid="uid://be6t24f88jkfw" path="res://assets/sprites/UI/ammo-pistol 32px.png" id="1_x4jx1"]
+[ext_resource type="Script" uid="uid://c67y1hc7dltu0" path="res://scripts/ui.gd" id="1_yev5y"]
+[ext_resource type="Texture2D" uid="uid://bq2el56wj1v0v" path="res://assets/sprites/UI/FN45.png" id="2_wm3ai"]
+[ext_resource type="Texture2D" uid="uid://beddmuygkp64s" path="res://assets/sprites/UI/health-red 32px.png" id="2_yev5y"]
+[ext_resource type="FontFile" uid="uid://djc3vrkholubo" path="res://assets/fonts/visitor2.ttf" id="3_gdt2y"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_yev5y")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Weapon" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 1060.0
+offset_top = 539.0
+offset_right = 1108.0
+offset_bottom = 587.0
+texture = ExtResource("2_wm3ai")
+stretch_mode = 3
+
+[node name="Ammo_container" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 936.00006
+offset_top = 586.0
+offset_right = 1123.0
+offset_bottom = 634.0
+scale = Vector2(1.3, 1.3)
+
+[node name="Ammo_icon" type="TextureRect" parent="Control/Ammo_container"]
+layout_mode = 2
+texture = ExtResource("1_x4jx1")
+stretch_mode = 3
+
+[node name="Ammo" type="Label" parent="Control/Ammo_container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_gdt2y")
+theme_override_font_sizes/font_size = 20
+text = "ammo 7 / 21"
+
+[node name="HP_container" type="HBoxContainer" parent="Control"]
+layout_mode = 1
+offset_left = 30.0
+offset_top = 600.0
+offset_right = 120.0
+offset_bottom = 632.0
+scale = Vector2(1.3, 1.3)
+
+[node name="TextureRect" type="TextureRect" parent="Control/HP_container"]
+layout_mode = 2
+texture = ExtResource("2_yev5y")
+
+[node name="HP" type="Label" parent="Control/HP_container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_gdt2y")
+theme_override_font_sizes/font_size = 20
+text = "Health"

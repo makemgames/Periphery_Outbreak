@@ -1,8 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcn2xs78okk30"]
+[gd_scene load_steps=4 format=3 uid="uid://dcn2xs78okk30"]
 
+[ext_resource type="Script" uid="uid://byr8x42l38b7e" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cqyxtjaih7voc" path="res://scenes/player.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://c7i6t5uh68w7s" path="res://scenes/ui.tscn" id="2_sugp2"]
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_jyhfs")
+
+[node name="UI" parent="." instance=ExtResource("2_sugp2")]
 
 [node name="Player" parent="." instance=ExtResource("1_o5qli")]
-position = Vector2(562, 295)
+position = Vector2(1242, 397)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+
+[node name="Zombie_spawn_timer" type="Timer" parent="."]
+wait_time = 4.0
+
+[connection signal="timeout" from="Zombie_spawn_timer" to="." method="_on_zombie_spawn_timer_timeout"]
