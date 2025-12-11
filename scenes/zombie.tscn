@@ -200,7 +200,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgv5u"]
-size = Vector2(68.5, 154)
+size = Vector2(70.5, 164)
 
 [node name="Zombie" type="Area2D"]
 script = ExtResource("1_qgv5u")
@@ -216,7 +216,7 @@ animation = &"move"
 speed_scale = 0.5
 
 [node name="Arms" type="CollisionShape2D" parent="."]
-position = Vector2(52.75, 9)
+position = Vector2(56.75, 23)
 shape = SubResource("RectangleShape2D_qgv5u")
 
 [node name="Healthbar" type="TextureProgressBar" parent="."]
@@ -230,5 +230,12 @@ texture_under = ExtResource("45_620wp")
 texture_over = ExtResource("46_sso3y")
 texture_progress = ExtResource("47_whhyg")
 
+[node name="Attack_timer" type="Timer" parent="."]
+
+[node name="Walking_sfx" type="AudioStreamPlayer2D" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="damage_dealt" from="." to="." method="_on_damage_dealt"]
 [connection signal="enemy_dead" from="." to="." method="_on_enemy_dead"]
+[connection signal="timeout" from="Attack_timer" to="." method="_on_attack_timer_timeout"]

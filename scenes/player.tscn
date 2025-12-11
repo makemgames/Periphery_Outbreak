@@ -1,4 +1,4 @@
-[gd_scene load_steps=177 format=3 uid="uid://cqyxtjaih7voc"]
+[gd_scene load_steps=178 format=3 uid="uid://cqyxtjaih7voc"]
 
 [ext_resource type="Texture2D" uid="uid://drloqibo5kkrm" path="res://assets/sprites/player/handgun/idle/survivor-idle_handgun_0.png" id="1_60mlk"]
 [ext_resource type="Script" uid="uid://b5pgj0b2ynngw" path="res://scripts/player.gd" id="1_i4ail"]
@@ -169,6 +169,7 @@
 [ext_resource type="Texture2D" uid="uid://nkoghmww1fup" path="res://assets/sprites/player/rifle/shoot/survivor-shoot_rifle_2.png" id="119_3l24j"]
 [ext_resource type="Texture2D" uid="uid://dqhrhv68vahnh" path="res://assets/sprites/player/weapons/muzzle_flash.png" id="168_r8o87"]
 [ext_resource type="AudioStream" uid="uid://bbv16sapfp1xc" path="res://assets/audio/ak-47_shot.wav" id="168_w8noa"]
+[ext_resource type="AudioStream" uid="uid://s30h5qn75f8o" path="res://assets/audio/ak-47-reload-sound-effect.wav" id="169_drj81"]
 [ext_resource type="Texture2D" uid="uid://cop3qwlhiquqy" path="res://assets/sprites/player/weapons/Rifle_muzzle_flash.png" id="170_3l24j"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_i4ail"]
@@ -756,9 +757,10 @@ script = ExtResource("1_i4ail")
 [node name="Body" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_i4ail")
-animation = &"rifle_shoot"
+animation = &"rifle_idle"
 
 [node name="Legs" type="AnimatedSprite2D" parent="."]
+position = Vector2(-12, 23)
 sprite_frames = SubResource("SpriteFrames_6c3st")
 animation = &"legs_idle"
 
@@ -780,6 +782,7 @@ pitch_scale = 1.73
 
 [node name="Pistol_shooting_sound" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("82_irpag")
+volume_db = -10.0
 
 [node name="Pistol_reload" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("104_wqna8")
@@ -791,6 +794,12 @@ pitch_scale = 1.54
 
 [node name="Rifle_shooting_sound" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("168_w8noa")
+volume_db = -7.0
+pitch_scale = 3.0
+
+[node name="Rifle_reload_sound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("169_drj81")
+pitch_scale = 1.57
 
 [node name="Shooting_timer" type="Timer" parent="."]
 wait_time = 0.4
@@ -810,7 +819,12 @@ position = Vector2(31, -9)
 scale = Vector2(0.08611314, 0.044295613)
 texture = ExtResource("170_3l24j")
 
+[node name="Stamina_timer" type="Timer" parent="."]
+
 [connection signal="ammo_updated" from="." to="." method="_on_ammo_updated"]
+[connection signal="stamina_updated" from="." to="." method="_on_stamina_updated"]
 [connection signal="weapon_changed" from="." to="." method="_on_weapon_changed"]
 [connection signal="animation_finished" from="Body" to="." method="_on_body_animation_finished"]
+[connection signal="animation_finished" from="Reload_animator" to="." method="_on_reload_animator_animation_finished"]
 [connection signal="timeout" from="Shooting_timer" to="." method="_on_pistol_shot_timeout"]
+[connection signal="timeout" from="Stamina_timer" to="." method="_on_stamina_timer_timeout"]

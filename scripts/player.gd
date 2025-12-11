@@ -1,21 +1,25 @@
 extends CharacterBody2D
 
-
 @onready var body_sprite: AnimatedSprite2D = $Body
 @onready var legs_sprite: AnimatedSprite2D = $Legs
 @onready var reload_animator: AnimationPlayer = $Reload_animator
 @onready var walking_sound: AudioStreamPlayer = $SFX/Walking_sound
 @onready var pistol_shooting_sound: AudioStreamPlayer = $SFX/Pistol_shooting_sound
 @onready var pistol_reload_sfx: AudioStreamPlayer = $SFX/Pistol_reload
+@onready var rifle_reload_sfx: AudioStreamPlayer = $SFX/Rifle_reload_sound
 @onready var bullet = preload("res://scenes/bullet.tscn")
 @onready var empty_gun: AudioStreamPlayer = $SFX/Empty_gun
 @onready var rifle_shooting_sound: AudioStreamPlayer = $SFX/Rifle_shooting_sound
 @onready var pistol_muzzle_flash: Sprite2D = $Gunshot_point/Pistol_muzzle_flash
 @onready var rifle_muzzle_flash: Sprite2D = $Gunshot_point/Rifle_muzzle_flash
 @onready var shooting_timer: Timer = $Shooting_timer
+@onready var stamina_timer: Timer = $Stamina_timer
+@onready var zombie_scene = preload("res://scenes/zombie.tscn")
 
 signal ammo_updated(current,reserve)
 signal weapon_changed
+signal stamina_updated(stamina)
+signal health_updated(health)
 
 var move_speed := 250
 var is_reloading := false
@@ -44,28 +48,55 @@ var rifle_data = {
 	"move": "rifle_move",
 	"fire_rate": 0.1,
 }
-
+#Ammo
 var current_weapon = pistol_data
 var current_ammo = current_weapon.max_mag_ammo
+#Stamina
+var max_stamina := 100
+var current_stamina = max_stamina
+var stamina_per_second = 20
+#Health
+var max_health := 100
+var current_health = max_health
 
+var is_running := false:
+	set(value):
+		if is_running == value:
+			return  # если статус не изменился – ничего не делаем
+		is_running = value
+		move_speed = 450 if value else 250
+		if value and current_stamina >= 20:
+			stamina_timer.start()
+			
+func damage_received(damage):
+	current_health = current_health - damage
+	current_health = max(current_health,0)
+	health_updated.emit(current_health)
+	if current_health <= 0:
+		die()
+		
+func die():
+	get_tree().paused = true
+	
 func weapon_switch():
 	current_weapon = rifle_data
 	current_ammo = rifle_data.max_mag_ammo
 	ammo_updated.emit(current_ammo,current_weapon["reserve_ammo"])
 	weapon_changed.emit()
-	
-var is_running := false:
-	set(value):
-		is_running = value 
-		move_speed = 450 if value else 250
-	
+	print("WEAPON SWITCHED!!!")
+
 func start_reload_anim():
 	is_reloading = true
 	body_sprite.play(current_weapon.reload)
 
 func end_reload_anim():
 	is_reloading = false
-
+func add_ammo():
+	print("ammo added")
+	
+func heal():
+	print("player heald")
+	
 func ammo_counter():
 	current_ammo = current_ammo - 1
 
@@ -102,6 +133,7 @@ func reload_weapon():
 	
 func _physics_process(delta: float) -> void:
 	#Movement
+	var player_holding_shift = Input.is_action_pressed("run")
 	is_running = Input.is_action_pressed("run")
 	var direction: Vector2 = Input.get_vector("move_left","move_right","move_up","move_down")
 	if direction != Vector2.ZERO:
@@ -134,16 +166,17 @@ func _physics_process(delta: float) -> void:
 			pass
 		else:
 			is_reloading = true
-			pistol_reload_sfx.play()
+			if current_weapon == pistol_data:
+				pistol_reload_sfx.play()
+			else:
+				rifle_reload_sfx.play()
 			reload_animator.play("reload_logic")
-			reload_weapon()
 			
 	if is_reloading:
 		reload_animator.play("reload_logic")
 	
 	elif Input.is_action_pressed("shoot") and not is_shot and not is_reloading and current_ammo >= 1:
 		fire_weapon()
-		print(current_ammo)
 		if current_weapon == pistol_data:
 			pistol_muzzle_flash.visible = true
 		else:
@@ -178,6 +211,32 @@ func _on_pistol_shot_timeout() -> void:
 func _on_ammo_updated(current: Variant, reserve: Variant) -> void:
 	pass # Replace with function body.
 
-
 func _on_weapon_changed() -> void:
 	pass # Replace with function body.
+
+
+func _on_stamina_timer_timeout() -> void:
+	if is_running:
+		current_stamina = current_stamina - stamina_per_second 
+		current_stamina = max(current_stamina,0)
+		if current_stamina < 20:
+			is_running = false
+		stamina_updated.emit(current_stamina)
+	else:
+		await get_tree().create_timer(1.0).timeout
+		if is_running:
+			return
+		current_stamina += stamina_per_second
+		if current_stamina >= max_stamina:
+			current_stamina = max_stamina
+	stamina_updated.emit(current_stamina)
+
+func _on_stamina_updated(stam) -> void:
+	pass # Replace with function body.
+
+
+func _on_reload_animator_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "reload_logic":
+		reload_weapon()
+		ammo_updated.emit(current_ammo,current_weapon.reserve_ammo)
+		is_reloading = false

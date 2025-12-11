@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcn2xs78okk30"]
+[gd_scene load_steps=7 format=3 uid="uid://dcn2xs78okk30"]
 
 [ext_resource type="Script" uid="uid://byr8x42l38b7e" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cqyxtjaih7voc" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="PackedScene" uid="uid://c7i6t5uh68w7s" path="res://scenes/ui.tscn" id="2_sugp2"]
+[ext_resource type="AudioStream" uid="uid://b85iyo3bpoqfn" path="res://assets/audio/zombie_death_sound_1.mp3" id="4_tefeu"]
+[ext_resource type="AudioStream" uid="uid://bp3y88fflpmrl" path="res://assets/audio/zombie_death_sound_2.mp3" id="5_o6xl0"]
+[ext_resource type="AudioStream" uid="uid://bgojuqjm2mbo8" path="res://assets/audio/zombie_death_sound_3.mp3" id="6_tipki"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jyhfs")
@@ -18,5 +21,16 @@ position_smoothing_enabled = true
 
 [node name="Zombie_spawn_timer" type="Timer" parent="."]
 wait_time = 4.0
+
+[node name="SFX_manager" type="Node" parent="."]
+
+[node name="ZombieDeathSound1" type="AudioStreamPlayer" parent="SFX_manager"]
+stream = ExtResource("4_tefeu")
+
+[node name="ZombieDeathSound2" type="AudioStreamPlayer" parent="SFX_manager"]
+stream = ExtResource("5_o6xl0")
+
+[node name="ZombieDeathSound3" type="AudioStreamPlayer" parent="SFX_manager"]
+stream = ExtResource("6_tipki")
 
 [connection signal="timeout" from="Zombie_spawn_timer" to="." method="_on_zombie_spawn_timer_timeout"]

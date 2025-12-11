@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://h6xlvd0515tf"]
+
+[ext_resource type="Texture2D" uid="uid://c6d8tbk31jham" path="res://assets/sprites/player/pickups/9mm_ammo.png" id="1_a2fpo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a2fpo"]
+size = Vector2(91, 68)
+
+[node name="Ammo_9mm_pickup" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5, 1)
+shape = SubResource("RectangleShape2D_a2fpo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_a2fpo")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

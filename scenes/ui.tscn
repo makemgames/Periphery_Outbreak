@@ -1,10 +1,71 @@
-[gd_scene load_steps=6 format=3 uid="uid://c7i6t5uh68w7s"]
+[gd_scene load_steps=12 format=3 uid="uid://c7i6t5uh68w7s"]
 
 [ext_resource type="Texture2D" uid="uid://be6t24f88jkfw" path="res://assets/sprites/UI/ammo-pistol 32px.png" id="1_x4jx1"]
 [ext_resource type="Script" uid="uid://c67y1hc7dltu0" path="res://scripts/ui.gd" id="1_yev5y"]
+[ext_resource type="Texture2D" uid="uid://bvwbhffm1w0va" path="res://assets/sprites/UI/killzone.png" id="2_p7vwb"]
 [ext_resource type="Texture2D" uid="uid://bq2el56wj1v0v" path="res://assets/sprites/UI/FN45.png" id="2_wm3ai"]
 [ext_resource type="Texture2D" uid="uid://beddmuygkp64s" path="res://assets/sprites/UI/health-red 32px.png" id="2_yev5y"]
 [ext_resource type="FontFile" uid="uid://djc3vrkholubo" path="res://assets/fonts/visitor2.ttf" id="3_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://des3cl35pojkn" path="res://assets/sprites/UI/stamina_icon.png" id="6_8dubc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wm3ai"]
+bg_color = Color(0, 0.1882353, 0.09411765, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dvkv"]
+bg_color = Color(0.039215688, 0.36078432, 0.20392157, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.14117648, 0.1764706, 0.14901961, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.5019608)
+shadow_size = 6
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p7vwb"]
+bg_color = Color(0.16470589, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8dubc"]
+bg_color = Color(0.6392157, 0.019607844, 0.101960786, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+border_blend = true
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_color = Color(0, 0, 0, 0.5019608)
+shadow_size = 6
+shadow_offset = Vector2(0, 2)
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_yev5y")
@@ -14,6 +75,97 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Kill_count" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_left = 874.0
+offset_top = -38.0
+offset_right = 1194.0
+offset_bottom = 181.0
+texture = ExtResource("2_p7vwb")
+expand_mode = 1
+
+[node name="Kill_count_text" type="Label" parent="Control/Kill_count"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.0
+offset_top = -117.0
+offset_right = 31.0
+offset_bottom = -94.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.9411765, 0.78431374, 0.47058824, 1)
+theme_override_fonts/font = ExtResource("3_gdt2y")
+theme_override_font_sizes/font_size = 28
+text = "KILLS"
+
+[node name="Kill_count_number" type="Label" parent="Control/Kill_count"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -11.5
+offset_right = -81.0
+offset_bottom = 17.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0, 0.3529412, 1)
+theme_override_fonts/font = ExtResource("3_gdt2y")
+theme_override_font_sizes/font_size = 40
+text = "122"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stamina_container" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 600.0
+offset_right = 294.0
+offset_bottom = 640.0
+pivot_offset = Vector2(0, 600)
+
+[node name="Stamina_icon" type="TextureRect" parent="Control/Stamina_container"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("6_8dubc")
+stretch_mode = 5
+
+[node name="Stamina_bar" type="ProgressBar" parent="Control/Stamina_container"]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_wm3ai")
+theme_override_styles/fill = SubResource("StyleBoxFlat_7dvkv")
+value = 100.0
+show_percentage = false
+
+[node name="Stamina_text" type="Label" parent="Control/Stamina_container/Stamina_bar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_gdt2y")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Weapon" type="TextureRect" parent="Control"]
 layout_mode = 0
@@ -43,20 +195,43 @@ theme_override_fonts/font = ExtResource("3_gdt2y")
 theme_override_font_sizes/font_size = 20
 text = "ammo 7 / 21"
 
-[node name="HP_container" type="HBoxContainer" parent="Control"]
-layout_mode = 1
-offset_left = 30.0
+[node name="Health_container" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 464.0
 offset_top = 600.0
-offset_right = 120.0
-offset_bottom = 632.0
-scale = Vector2(1.3, 1.3)
+offset_right = 708.0
+offset_bottom = 640.0
 
-[node name="TextureRect" type="TextureRect" parent="Control/HP_container"]
+[node name="Health_icon" type="TextureRect" parent="Control/Health_container"]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("2_yev5y")
+stretch_mode = 5
 
-[node name="HP" type="Label" parent="Control/HP_container"]
+[node name="Health_bar" type="ProgressBar" parent="Control/Health_container"]
+z_index = 1
+custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_p7vwb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8dubc")
+value = 100.0
+show_percentage = false
+
+[node name="Health_text" type="Label" parent="Control/Health_container/Health_bar"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_gdt2y")
 theme_override_font_sizes/font_size = 20
-text = "Health"
+horizontal_alignment = 1
+vertical_alignment = 1
