@@ -29,7 +29,7 @@ var pistol_data = {
 	"name": "pistol",
 	"max_ammo": 28,
 	"max_mag_ammo": 7,
-	"reserve_ammo": 21,
+	"reserve_ammo": 28,
 	"idle": "pistol_idle",
 	"reload": "pistol_reload",
 	"shoot": "pistol_shoot",
@@ -47,6 +47,7 @@ var rifle_data = {
 	"shoot": "rifle_shoot",
 	"move": "rifle_move",
 	"fire_rate": 0.1,
+	"owned" : false,
 }
 #Ammo
 var current_weapon = pistol_data
@@ -79,11 +80,14 @@ func die():
 	get_tree().paused = true
 	
 func weapon_switch():
-	current_weapon = rifle_data
-	current_ammo = rifle_data.max_mag_ammo
+	if current_weapon == pistol_data:
+		current_weapon = rifle_data
+	else:
+		current_weapon = pistol_data
+		
+	current_ammo = current_weapon.max_mag_ammo
 	ammo_updated.emit(current_ammo,current_weapon["reserve_ammo"])
 	weapon_changed.emit()
-	print("WEAPON SWITCHED!!!")
 
 func start_reload_anim():
 	is_reloading = true
@@ -91,11 +95,15 @@ func start_reload_anim():
 
 func end_reload_anim():
 	is_reloading = false
+	
 func add_ammo():
-	print("ammo added")
+	current_weapon.reserve_ammo += current_weapon.max_mag_ammo
+	print(current_weapon.reserve_ammo)
+	ammo_updated.emit(current_ammo,current_weapon.reserve_ammo)
 	
 func heal():
-	print("player heald")
+	current_health += 20
+	health_updated.emit(current_health)
 	
 func ammo_counter():
 	current_ammo = current_ammo - 1
@@ -174,6 +182,8 @@ func _physics_process(delta: float) -> void:
 			
 	if is_reloading:
 		reload_animator.play("reload_logic")
+		
+	
 	
 	elif Input.is_action_pressed("shoot") and not is_shot and not is_reloading and current_ammo >= 1:
 		fire_weapon()
@@ -192,7 +202,20 @@ func _physics_process(delta: float) -> void:
 		body_sprite.play(current_weapon.move)
 	else:
 		body_sprite.play(current_weapon.idle)
+		
+	if Input.is_action_just_pressed("pistol"):
+		current_weapon = pistol_data
+		current_ammo = current_weapon.max_mag_ammo
+		weapon_changed.emit()
+		ammo_updated.emit(current_ammo, current_weapon.reserve_ammo)
 
+	elif Input.is_action_just_pressed("rifle") and rifle_data["owned"]:
+		current_weapon = rifle_data
+		current_ammo = current_weapon.max_mag_ammo
+		weapon_changed.emit()
+		ammo_updated.emit(current_ammo, current_weapon.reserve_ammo)
+
+	
 	#Animations legs
 	if direction != Vector2.ZERO and is_running == true:
 		legs_sprite.play("legs_run")

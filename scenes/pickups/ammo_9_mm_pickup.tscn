@@ -1,11 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://h6xlvd0515tf"]
+[gd_scene load_steps=4 format=3 uid="uid://h6xlvd0515tf"]
 
+[ext_resource type="Script" uid="uid://cg0worh4oer25" path="res://scripts/pickup.gd" id="1_71s54"]
 [ext_resource type="Texture2D" uid="uid://c6d8tbk31jham" path="res://assets/sprites/player/pickups/9mm_ammo.png" id="1_a2fpo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a2fpo"]
 size = Vector2(91, 68)
 
 [node name="Ammo_9mm_pickup" type="Area2D"]
+script = ExtResource("1_71s54")
+pickup_type = "ammo"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, 1)

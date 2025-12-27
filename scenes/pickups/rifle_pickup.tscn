@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cisktquilstl2"]
+
+[ext_resource type="Script" uid="uid://cg0worh4oer25" path="res://scripts/pickup.gd" id="1_prc1x"]
+[ext_resource type="Texture2D" uid="uid://b82vrfnupvyss" path="res://assets/sprites/player/weapons/ak-47-gun-png.png" id="2_fd37j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_prc1x"]
+size = Vector2(230, 67)
+
+[node name="Rifle_pickup" type="Area2D"]
+script = ExtResource("1_prc1x")
+pickup_type = "weapon"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(15, 29.5)
+shape = SubResource("RectangleShape2D_prc1x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(13, 16)
+scale = Vector2(0.27539063, 0.21158855)
+texture = ExtResource("2_fd37j")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
