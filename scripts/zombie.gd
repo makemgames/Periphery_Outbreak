@@ -12,7 +12,7 @@ var random_sound
 const BLOOD_HIT = preload("uid://fxt3fbsv6536")
 const BLOOD_DEATH = preload("uid://divkwpemyobhk")
 
-@export var max_hp: int = 100
+@export var max_hp: int = 150
 
 var direction: Vector2
 var speed = 200
@@ -40,7 +40,7 @@ func play_walk_sfx():
 func _ready() -> void:
 	healthbar.visible = false
 	random_sound = walking_sounds.pick_random()
-
+	
 func _process(delta: float) -> void:
 	var distance_to_player = position.distance_to(player.position)
 	look_at(player.position)

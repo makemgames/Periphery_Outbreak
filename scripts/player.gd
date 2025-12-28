@@ -20,6 +20,7 @@ signal ammo_updated(current,reserve)
 signal weapon_changed
 signal stamina_updated(stamina)
 signal health_updated(health)
+signal player_dead
 
 var move_speed := 250
 var is_reloading := false
@@ -77,7 +78,7 @@ func damage_received(damage):
 		die()
 		
 func die():
-	get_tree().paused = true
+	player_dead.emit()
 	
 func weapon_switch():
 	if current_weapon == pistol_data:

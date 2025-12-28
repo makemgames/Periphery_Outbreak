@@ -720,7 +720,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i4ail"]
-size = Vector2(96.5, 67.5)
+size = Vector2(216, 151)
 
 [sub_resource type="Animation" id="Animation_dnnjp"]
 length = 0.001
@@ -765,7 +765,7 @@ sprite_frames = SubResource("SpriteFrames_6c3st")
 animation = &"legs_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 10)
+position = Vector2(-22, 9.5)
 shape = SubResource("RectangleShape2D_i4ail")
 
 [node name="Reload_animator" type="AnimationPlayer" parent="."]

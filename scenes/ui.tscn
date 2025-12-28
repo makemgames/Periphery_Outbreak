@@ -1,237 +1,488 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7i6t5uh68w7s"]
+[gd_scene load_steps=9 format=3 uid="uid://c0w3fc0ccf7ag"]
 
-[ext_resource type="Texture2D" uid="uid://be6t24f88jkfw" path="res://assets/sprites/UI/ammo-pistol 32px.png" id="1_x4jx1"]
-[ext_resource type="Script" uid="uid://c67y1hc7dltu0" path="res://scripts/ui.gd" id="1_yev5y"]
-[ext_resource type="Texture2D" uid="uid://bvwbhffm1w0va" path="res://assets/sprites/UI/killzone.png" id="2_p7vwb"]
-[ext_resource type="Texture2D" uid="uid://bq2el56wj1v0v" path="res://assets/sprites/UI/FN45.png" id="2_wm3ai"]
-[ext_resource type="Texture2D" uid="uid://beddmuygkp64s" path="res://assets/sprites/UI/health-red 32px.png" id="2_yev5y"]
-[ext_resource type="FontFile" uid="uid://djc3vrkholubo" path="res://assets/fonts/visitor2.ttf" id="3_gdt2y"]
-[ext_resource type="Texture2D" uid="uid://des3cl35pojkn" path="res://assets/sprites/UI/stamina_icon.png" id="6_8dubc"]
+[ext_resource type="Texture2D" uid="uid://cooa4rgot532t" path="res://assets/sprites/UI/mainmenu_bg.png" id="1_nt7q6"]
+[ext_resource type="FontFile" uid="uid://d0bawy8peiiur" path="res://assets/fonts/Cinzel-VariableFont_wght.ttf" id="1_x4jx1"]
+[ext_resource type="Script" uid="uid://d0uxks6rea87r" path="res://scripts/ui.gd" id="1_yev5y"]
+[ext_resource type="Texture2D" uid="uid://l25n8erc6070" path="res://assets/sprites/UI/paused_menu.png" id="4_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://d3cj5qxqyll18" path="res://assets/sprites/UI/you_died.png" id="5_wm3ai"]
+[ext_resource type="Texture2D" uid="uid://bbfhmqe7l0135" path="res://assets/sprites/UI/you_win.png" id="6_8dubc"]
+[ext_resource type="FontFile" uid="uid://cl7wk8b2dmb23" path="res://assets/fonts/IBMPlexMono-Regular.ttf" id="7_p7vwb"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wm3ai"]
-bg_color = Color(0, 0.1882353, 0.09411765, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-shadow_size = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dvkv"]
-bg_color = Color(0.039215688, 0.36078432, 0.20392157, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.14117648, 0.1764706, 0.14901961, 1)
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-shadow_color = Color(0, 0, 0, 0.5019608)
-shadow_size = 6
-shadow_offset = Vector2(0, 2)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p7vwb"]
-bg_color = Color(0.16470589, 0, 0, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-shadow_size = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8dubc"]
-bg_color = Color(0.6392157, 0.019607844, 0.101960786, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.101960786, 0.101960786, 0.101960786, 1)
-border_blend = true
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-shadow_color = Color(0, 0, 0, 0.5019608)
-shadow_size = 6
-shadow_offset = Vector2(0, 2)
+[sub_resource type="Theme" id="Theme_yev5y"]
+default_font = ExtResource("1_x4jx1")
+default_font_size = 22
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_yev5y")
 
-[node name="Control" type="Control" parent="."]
+[node name="Main_menu" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_yev5y")
 
-[node name="Kill_count" type="TextureRect" parent="Control"]
-layout_mode = 0
-offset_left = 874.0
-offset_top = -38.0
-offset_right = 1194.0
-offset_bottom = 181.0
-texture = ExtResource("2_p7vwb")
+[node name="ColorRect" type="ColorRect" parent="Main_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.27058825)
+
+[node name="TextureRect" type="TextureRect" parent="Main_menu"]
+modulate = Color(0.627451, 0.627451, 0.627451, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_nt7q6")
 expand_mode = 1
+stretch_mode = 6
 
-[node name="Kill_count_text" type="Label" parent="Control/Kill_count"]
+[node name="Background" type="TextureRect" parent="Main_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_nt7q6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Main_menu"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.1897
+offset_top = -20.0
+offset_right = 138.1897
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="New_game" type="Button" parent="Main_menu/VBoxContainer"]
+layout_mode = 2
+text = "New game"
+
+[node name="Options" type="Button" parent="Main_menu/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Quit" type="Button" parent="Main_menu/VBoxContainer"]
+layout_mode = 2
+text = "Quit game"
+
+[node name="Pause_menu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_yev5y")
+
+[node name="ColorRect" type="ColorRect" parent="Pause_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.27058825)
+
+[node name="TextureRect" type="TextureRect" parent="Pause_menu"]
+modulate = Color(0.627451, 0.627451, 0.627451, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_gdt2y")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Background" type="TextureRect" parent="Pause_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_gdt2y")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pause_menu"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.1897
+offset_top = -20.0
+offset_right = 138.1897
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Continue" type="Button" parent="Pause_menu/VBoxContainer"]
+layout_mode = 2
+text = "Continue"
+
+[node name="Main_Menu" type="Button" parent="Pause_menu/VBoxContainer"]
+layout_mode = 2
+text = "Main menu"
+
+[node name="Options2" type="Button" parent="Pause_menu/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Quit" type="Button" parent="Pause_menu/VBoxContainer"]
+layout_mode = 2
+text = "Quit game"
+
+[node name="Death_menu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_yev5y")
+
+[node name="ColorRect" type="ColorRect" parent="Death_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.27058825)
+
+[node name="TextureRect" type="TextureRect" parent="Death_menu"]
+modulate = Color(0.627451, 0.627451, 0.627451, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_wm3ai")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Background" type="TextureRect" parent="Death_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_wm3ai")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Death_menu"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -138.1897
+offset_top = -20.0
+offset_right = 138.1897
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="Retry" type="Button" parent="Death_menu/VBoxContainer"]
+layout_mode = 2
+text = "Retry
+"
+
+[node name="Main_Menu" type="Button" parent="Death_menu/VBoxContainer"]
+layout_mode = 2
+text = "Main_menu"
+
+[node name="Options" type="Button" parent="Death_menu/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="Quit" type="Button" parent="Death_menu/VBoxContainer"]
+layout_mode = 2
+text = "Quit game"
+
+[node name="Win_menu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_yev5y")
+
+[node name="ColorRect" type="ColorRect" parent="Win_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.27058825)
+
+[node name="TextureRect" type="TextureRect" parent="Win_menu"]
+modulate = Color(0.627451, 0.627451, 0.627451, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_8dubc")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Background" type="TextureRect" parent="Win_menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_8dubc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Buttons_container" type="VBoxContainer" parent="Win_menu"]
+z_index = 1
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -34.0
-offset_top = -117.0
-offset_right = 31.0
-offset_bottom = -94.0
+offset_left = -138.1897
+offset_top = -284.0
+offset_right = 138.1897
+offset_bottom = -97.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_colors/font_color = Color(0.9411765, 0.78431374, 0.47058824, 1)
-theme_override_fonts/font = ExtResource("3_gdt2y")
-theme_override_font_sizes/font_size = 28
-text = "KILLS"
+theme_override_constants/separation = 4
+alignment = 1
 
-[node name="Kill_count_number" type="Label" parent="Control/Kill_count"]
+[node name="Retry" type="Button" parent="Win_menu/Buttons_container"]
+layout_mode = 2
+text = "Retry
+"
+
+[node name="Main_Menu" type="Button" parent="Win_menu/Buttons_container"]
+layout_mode = 2
+text = "Main_menu"
+
+[node name="Options" type="Button" parent="Win_menu/Buttons_container"]
+layout_mode = 2
+text = "Options"
+
+[node name="Quit" type="Button" parent="Win_menu/Buttons_container"]
+layout_mode = 2
+text = "Quit game"
+
+[node name="Stats_container" type="VBoxContainer" parent="Win_menu"]
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -205.5
+offset_top = -60.0
+offset_right = 205.5
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Time_row" type="HBoxContainer" parent="Win_menu/Stats_container"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Time_text" type="Label" parent="Win_menu/Stats_container/Time_row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68235296, 0.6901961, 0.6862745, 0.7058824)
+theme_override_fonts/font = ExtResource("7_p7vwb")
+theme_override_font_sizes/font_size = 22
+text = "Time alive:"
+
+[node name="Spacer" type="Control" parent="Win_menu/Stats_container/Time_row"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Time_number" type="Label" parent="Win_menu/Stats_container/Time_row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68235296, 0.6901961, 0.6862745, 0.7058824)
+theme_override_fonts/font = ExtResource("7_p7vwb")
+theme_override_font_sizes/font_size = 22
+text = "03:32"
+
+[node name="Kills_row" type="HBoxContainer" parent="Win_menu/Stats_container"]
+layout_mode = 2
+
+[node name="Kills_text" type="Label" parent="Win_menu/Stats_container/Kills_row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68235296, 0.6901961, 0.6862745, 0.7058824)
+theme_override_fonts/font = ExtResource("7_p7vwb")
+theme_override_font_sizes/font_size = 22
+text = "Kills: "
+
+[node name="Spacer" type="Control" parent="Win_menu/Stats_container/Kills_row"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Kills_number" type="Label" parent="Win_menu/Stats_container/Kills_row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68235296, 0.6901961, 0.6862745, 0.7058824)
+theme_override_fonts/font = ExtResource("7_p7vwb")
+theme_override_font_sizes/font_size = 22
+
+[node name="Score_row" type="HBoxContainer" parent="Win_menu/Stats_container"]
+layout_mode = 2
+
+[node name="Score_text" type="Label" parent="Win_menu/Stats_container/Score_row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68235296, 0.6901961, 0.6862745, 0.7058824)
+theme_override_fonts/font = ExtResource("7_p7vwb")
+theme_override_font_sizes/font_size = 22
+text = "Score:"
+
+[node name="Spacer" type="Control" parent="Win_menu/Stats_container/Score_row"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Score_number" type="Label" parent="Win_menu/Stats_container/Score_row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68235296, 0.6901961, 0.6862745, 0.7058824)
+theme_override_fonts/font = ExtResource("7_p7vwb")
+theme_override_font_sizes/font_size = 22
+text = "1283"
+
+[node name="Best_row" type="HBoxContainer" parent="Win_menu/Stats_container"]
+layout_mode = 2
+
+[node name="Best_text" type="Label" parent="Win_menu/Stats_container/Best_row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68235296, 0.6901961, 0.6862745, 0.7058824)
+theme_override_fonts/font = ExtResource("7_p7vwb")
+theme_override_font_sizes/font_size = 22
+text = "Best:"
+
+[node name="Spacer" type="Control" parent="Win_menu/Stats_container/Best_row"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Best_number" type="Label" parent="Win_menu/Stats_container/Best_row"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68235296, 0.6901961, 0.6862745, 0.7058824)
+theme_override_fonts/font = ExtResource("7_p7vwb")
+theme_override_font_sizes/font_size = 22
+
+[node name="Loading" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -128.0
-offset_top = -11.5
-offset_right = -81.0
-offset_bottom = 17.5
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(1, 0, 0.3529412, 1)
-theme_override_fonts/font = ExtResource("3_gdt2y")
-theme_override_font_sizes/font_size = 40
-text = "122"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Stamina_container" type="HBoxContainer" parent="Control"]
-layout_mode = 0
-offset_left = 50.0
-offset_top = 600.0
-offset_right = 294.0
-offset_bottom = 640.0
-pivot_offset = Vector2(0, 600)
-
-[node name="Stamina_icon" type="TextureRect" parent="Control/Stamina_container"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("6_8dubc")
-stretch_mode = 5
-
-[node name="Stamina_bar" type="ProgressBar" parent="Control/Stamina_container"]
-custom_minimum_size = Vector2(200, 20)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_wm3ai")
-theme_override_styles/fill = SubResource("StyleBoxFlat_7dvkv")
-value = 100.0
-show_percentage = false
-
-[node name="Stamina_text" type="Label" parent="Control/Stamina_container/Stamina_bar"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_gdt2y")
-theme_override_font_sizes/font_size = 20
-horizontal_alignment = 1
-vertical_alignment = 1
+theme = SubResource("Theme_yev5y")
 
-[node name="Weapon" type="TextureRect" parent="Control"]
-layout_mode = 0
-offset_left = 1060.0
-offset_top = 539.0
-offset_right = 1108.0
-offset_bottom = 587.0
-texture = ExtResource("2_wm3ai")
-stretch_mode = 3
-
-[node name="Ammo_container" type="HBoxContainer" parent="Control"]
-layout_mode = 0
-offset_left = 936.00006
-offset_top = 586.0
-offset_right = 1123.0
-offset_bottom = 634.0
-scale = Vector2(1.3, 1.3)
-
-[node name="Ammo_icon" type="TextureRect" parent="Control/Ammo_container"]
-layout_mode = 2
-texture = ExtResource("1_x4jx1")
-stretch_mode = 3
-
-[node name="Ammo" type="Label" parent="Control/Ammo_container"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_gdt2y")
-theme_override_font_sizes/font_size = 20
-text = "ammo 7 / 21"
-
-[node name="Health_container" type="HBoxContainer" parent="Control"]
-layout_mode = 0
-offset_left = 464.0
-offset_top = 600.0
-offset_right = 708.0
-offset_bottom = 640.0
-
-[node name="Health_icon" type="TextureRect" parent="Control/Health_container"]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-texture = ExtResource("2_yev5y")
-stretch_mode = 5
-
-[node name="Health_bar" type="ProgressBar" parent="Control/Health_container"]
-z_index = 1
-custom_minimum_size = Vector2(200, 20)
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_styles/background = SubResource("StyleBoxFlat_p7vwb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_8dubc")
-value = 100.0
-show_percentage = false
-
-[node name="Health_text" type="Label" parent="Control/Health_container/Health_bar"]
+[node name="ColorRect" type="ColorRect" parent="Loading"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_gdt2y")
-theme_override_font_sizes/font_size = 20
-horizontal_alignment = 1
-vertical_alignment = 1
+color = Color(0, 0, 0, 0.27058825)
+
+[node name="TextureRect" type="TextureRect" parent="Loading"]
+modulate = Color(0.627451, 0.627451, 0.627451, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_nt7q6")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="Background" type="TextureRect" parent="Loading"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_nt7q6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Loading"]
+layout_mode = 0
+offset_left = 881.0
+offset_top = 528.0
+offset_right = 1131.0
+offset_bottom = 624.0
+
+[node name="Loading_text" type="Label" parent="Loading/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Loading..."
+
+[node name="Loading_bar" type="ProgressBar" parent="Loading/VBoxContainer"]
+layout_mode = 2
+
+[node name="Loading_timer" type="Timer" parent="."]
+
+[connection signal="pressed" from="Main_menu/VBoxContainer/New_game" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="Main_menu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Pause_menu/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="Pause_menu/VBoxContainer/Main_Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Pause_menu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Death_menu/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Death_menu/VBoxContainer/Main_Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Death_menu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Win_menu/Buttons_container/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="Win_menu/Buttons_container/Main_Menu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Win_menu/Buttons_container/Quit" to="." method="_on_quit_pressed"]
+[connection signal="timeout" from="Loading_timer" to="." method="_on_loading_timer_timeout"]
