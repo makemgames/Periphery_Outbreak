@@ -15,6 +15,13 @@ extends CharacterBody2D
 @onready var shooting_timer: Timer = $Shooting_timer
 @onready var stamina_timer: Timer = $Stamina_timer
 @onready var zombie_scene = preload("res://scenes/zombie.tscn")
+@onready var flashlight: PointLight2D = $Gunshot_point/Flashlight
+@onready var flashlight_timer: Timer = $Gunshot_point/Flashlight/Flashlight_timer
+@onready var player_death_sound: AudioStreamPlayer = $SFX/PlayerDeathSound
+@onready var player_grunt_sound: AudioStreamPlayer = $SFX/PlayerGrunt
+@onready var flashlight_broken: AudioStreamPlayer = $SFX/FlashlightBroken
+
+@export var background_sprite: Sprite2D
 
 signal ammo_updated(current,reserve)
 signal weapon_changed
@@ -25,6 +32,8 @@ signal player_dead
 var move_speed := 250
 var is_reloading := false
 var is_shot := false
+var flashlight_base_energy := 1.6 
+var flashlight_flicker_active := false
 
 var pistol_data = {
 	"name": "pistol",
@@ -72,6 +81,7 @@ var is_running := false:
 			
 func damage_received(damage):
 	current_health = current_health - damage
+	player_grunt_sound.play()
 	current_health = max(current_health,0)
 	health_updated.emit(current_health)
 	if current_health <= 0:
@@ -79,7 +89,7 @@ func damage_received(damage):
 		
 func die():
 	player_dead.emit()
-	
+	player_death_sound.play()
 func weapon_switch():
 	if current_weapon == pistol_data:
 		current_weapon = rifle_data
@@ -140,6 +150,26 @@ func reload_weapon():
 		current_weapon["reserve_ammo"] = 0
 	ammo_updated.emit(current_ammo,current_weapon["reserve_ammo"])
 	
+
+func get_bg_bounds() -> Rect2:
+	var tex_size = background_sprite.texture.get_size() * background_sprite.global_scale
+	var half = tex_size * 0.5
+	var center = background_sprite.global_position
+
+	var top_left = center - half
+	return Rect2(top_left, tex_size)
+
+
+func _limit_to_bg():
+	if background_sprite == null or background_sprite.texture == null:
+		return
+	var r = get_bg_bounds()
+	global_position.x = clamp(global_position.x, r.position.x, r.position.x + r.size.x)
+	global_position.y = clamp(global_position.y, r.position.y, r.position.y + r.size.y)
+	
+func _ready():
+	flashlight_base_energy = flashlight.energy
+
 func _physics_process(delta: float) -> void:
 	#Movement
 	var player_holding_shift = Input.is_action_pressed("run")
@@ -226,7 +256,7 @@ func _physics_process(delta: float) -> void:
 		legs_sprite.play("legs_idle")
 
 	move_and_slide()
-
+	_limit_to_bg()
 
 func _on_pistol_shot_timeout() -> void:
 	is_shot = false
@@ -264,3 +294,32 @@ func _on_reload_animator_animation_finished(anim_name: StringName) -> void:
 		reload_weapon()
 		ammo_updated.emit(current_ammo,current_weapon.reserve_ammo)
 		is_reloading = false
+
+
+func _on_flashlight_timer_timeout() -> void:
+	if flashlight_flicker_active:
+		return
+
+	# шанс срабатывания
+	if randf() > 0.35:
+		return
+
+	flashlight_flicker_active = true
+
+	if randf() < 0.6:
+		flashlight_broken.pitch_scale = randf_range(0.9, 1.15)
+		flashlight_broken.volume_db = -8.0
+		flashlight_broken.play()
+		
+	var mode := randi() % 2
+	var duration := randf_range(0.16, 1.0) # <= 1 сек
+
+	if mode == 0:
+		flashlight.energy = flashlight_base_energy * randf_range(0.3, 0.7)
+	else:
+		flashlight.energy = 0.05
+
+	await get_tree().create_timer(duration).timeout
+
+	flashlight.energy = flashlight_base_energy
+	flashlight_flicker_active = false

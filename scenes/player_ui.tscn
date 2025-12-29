@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7i6t5uh68w7s"]
+[gd_scene load_steps=13 format=3 uid="uid://c7i6t5uh68w7s"]
 
 [ext_resource type="Texture2D" uid="uid://be6t24f88jkfw" path="res://assets/sprites/UI/ammo-pistol 32px.png" id="1_x4jx1"]
 [ext_resource type="Script" uid="uid://c67y1hc7dltu0" path="res://scripts/player_ui.gd" id="1_yev5y"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://beddmuygkp64s" path="res://assets/sprites/UI/health-red 32px.png" id="2_yev5y"]
 [ext_resource type="FontFile" uid="uid://djc3vrkholubo" path="res://assets/fonts/visitor2.ttf" id="3_gdt2y"]
 [ext_resource type="Texture2D" uid="uid://des3cl35pojkn" path="res://assets/sprites/UI/stamina_icon.png" id="6_8dubc"]
+[ext_resource type="Texture2D" uid="uid://80yeeaqqafaj" path="res://assets/sprites/UI/viniete.png" id="8_wsb5h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wm3ai"]
 bg_color = Color(0, 0.1882353, 0.09411765, 1)
@@ -261,3 +262,15 @@ theme_override_fonts/font = ExtResource("3_gdt2y")
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Viniete" type="TextureRect" parent="Control"]
+self_modulate = Color(0.039215688, 0.039215688, 0.039215688, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_wsb5h")
+expand_mode = 1

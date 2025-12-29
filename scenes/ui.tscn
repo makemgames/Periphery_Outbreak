@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0w3fc0ccf7ag"]
+[gd_scene load_steps=13 format=3 uid="uid://c0w3fc0ccf7ag"]
 
 [ext_resource type="Texture2D" uid="uid://cooa4rgot532t" path="res://assets/sprites/UI/mainmenu_bg.png" id="1_nt7q6"]
 [ext_resource type="FontFile" uid="uid://d0bawy8peiiur" path="res://assets/fonts/Cinzel-VariableFont_wght.ttf" id="1_x4jx1"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://d3cj5qxqyll18" path="res://assets/sprites/UI/you_died.png" id="5_wm3ai"]
 [ext_resource type="Texture2D" uid="uid://bbfhmqe7l0135" path="res://assets/sprites/UI/you_win.png" id="6_8dubc"]
 [ext_resource type="FontFile" uid="uid://cl7wk8b2dmb23" path="res://assets/fonts/IBMPlexMono-Regular.ttf" id="7_p7vwb"]
+[ext_resource type="AudioStream" uid="uid://ykcml550ws8i" path="res://assets/audio/you_died_theme.mp3" id="8_ktti3"]
+[ext_resource type="AudioStream" uid="uid://c2mjap82uuyxj" path="res://assets/audio/main_menu_theme.mp3" id="9_vdcm2"]
+[ext_resource type="AudioStream" uid="uid://b8vaudj5til1l" path="res://assets/audio/game_won_theme.mp3" id="10_6rmj2"]
+[ext_resource type="AudioStream" uid="uid://cxe4esv07fhdu" path="res://assets/audio/game_sounds.mp3" id="11_vsj0x"]
 
 [sub_resource type="Theme" id="Theme_yev5y"]
 default_font = ExtResource("1_x4jx1")
@@ -349,7 +353,6 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.68235296, 0.6901961, 0.6862745, 0.7058824)
 theme_override_fonts/font = ExtResource("7_p7vwb")
 theme_override_font_sizes/font_size = 22
-text = "03:32"
 
 [node name="Kills_row" type="HBoxContainer" parent="Win_menu/Stats_container"]
 layout_mode = 2
@@ -473,6 +476,25 @@ text = "Loading..."
 layout_mode = 2
 
 [node name="Loading_timer" type="Timer" parent="."]
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="YouDiedTheme" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("8_ktti3")
+parameters/looping = true
+
+[node name="MainMenuTheme" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("9_vdcm2")
+parameters/looping = true
+
+[node name="GameWonTheme" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("10_6rmj2")
+parameters/looping = true
+
+[node name="GameSounds" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("11_vsj0x")
+volume_db = 24.0
+parameters/looping = false
 
 [connection signal="pressed" from="Main_menu/VBoxContainer/New_game" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="Main_menu/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

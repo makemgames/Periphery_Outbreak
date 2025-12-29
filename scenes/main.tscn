@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcn2xs78okk30"]
+[gd_scene load_steps=11 format=3 uid="uid://dcn2xs78okk30"]
 
 [ext_resource type="Script" uid="uid://byr8x42l38b7e" path="res://scripts/main.gd" id="1_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://cqyxtjaih7voc" path="res://scenes/player.tscn" id="1_o5qli"]
@@ -6,22 +6,26 @@
 [ext_resource type="AudioStream" uid="uid://b85iyo3bpoqfn" path="res://assets/audio/zombie_death_sound_1.mp3" id="4_tefeu"]
 [ext_resource type="AudioStream" uid="uid://bp3y88fflpmrl" path="res://assets/audio/zombie_death_sound_2.mp3" id="5_o6xl0"]
 [ext_resource type="AudioStream" uid="uid://bgojuqjm2mbo8" path="res://assets/audio/zombie_death_sound_3.mp3" id="6_tipki"]
+[ext_resource type="AudioStream" uid="uid://rvp4x32jtkrg" path="res://assets/audio/health-pickup.mp3" id="7_85g3d"]
+[ext_resource type="AudioStream" uid="uid://s1lk2mqylf22" path="res://assets/audio/ammo-pick-up-sound.wav" id="8_choun"]
 [ext_resource type="PackedScene" uid="uid://c0w3fc0ccf7ag" path="res://scenes/ui.tscn" id="8_tipki"]
+[ext_resource type="Texture2D" uid="uid://bkn1liny8nj8u" path="res://assets/sprites/UI/floor.png" id="10_eb6dy"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jyhfs")
 
 [node name="Player_ui" parent="." instance=ExtResource("2_sugp2")]
 
-[node name="Player" parent="." instance=ExtResource("1_o5qli")]
+[node name="Player" parent="." node_paths=PackedStringArray("background_sprite") instance=ExtResource("1_o5qli")]
 position = Vector2(1242, 397)
+background_sprite = NodePath("../Background")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.35, 0.35)
+zoom = Vector2(0.8, 0.8)
 position_smoothing_enabled = true
 
 [node name="Zombie_spawn_timer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 2.5
 
 [node name="SFX_manager" type="Node" parent="."]
 
@@ -34,8 +38,23 @@ stream = ExtResource("5_o6xl0")
 [node name="ZombieDeathSound3" type="AudioStreamPlayer" parent="SFX_manager"]
 stream = ExtResource("6_tipki")
 
+[node name="HealthPickup" type="AudioStreamPlayer" parent="SFX_manager"]
+stream = ExtResource("7_85g3d")
+
+[node name="AmmoPickUpSound" type="AudioStreamPlayer" parent="SFX_manager"]
+stream = ExtResource("8_choun")
+
 [node name="Main_menu" parent="." instance=ExtResource("8_tipki")]
 process_mode = 2
 layer = 10
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -10
+position = Vector2(1199, 551)
+scale = Vector2(3, 3)
+texture = ExtResource("10_eb6dy")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.078431375, 0.078431375, 0.078431375, 1)
 
 [connection signal="timeout" from="Zombie_spawn_timer" to="." method="_on_zombie_spawn_timer_timeout"]
